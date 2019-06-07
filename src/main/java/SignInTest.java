@@ -1,13 +1,14 @@
 import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SignInTest {
 
-    WebDriver driver = new ChromeDriver();
+//    WebDriver driver = new ChromeDriver();
+    WebDriver driver = new FirefoxDriver();
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
@@ -20,6 +21,14 @@ public class SignInTest {
         driver.findElement(By.linkText("Your trips")).click();
         driver.findElement(By.id("SignIn")).click();
 
+
+        
+//        ContentFrame
+//      Wait 5 Seconds to the frame load
+        waitFor(5000);
+        
+//      Switch focus to Iframe
+        driver.switchTo().frame(1);
         driver.findElement(By.id("signInButton")).click();
 
         String errors1 = driver.findElement(By.id("errors1")).getText();
